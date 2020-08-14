@@ -1,0 +1,50 @@
+﻿@page
+@model Pickin.Pages.Empresas.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Empresa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Empresa.Codigo" class="control-label"></label>
+                <input asp-for="Empresa.Codigo" class="form-control" />
+                <span asp-validation-for="Empresa.Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empresa.Descripcion" class="control-label"></label>
+                <input asp-for="Empresa.Descripcion" class="form-control" />
+                <span asp-validation-for="Empresa.Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empresa.Image" class="control-label"></label>
+                @if (Model.Empresa.Image != null)
+                {
+                    <img alt="@Model.Empresa.Id" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Empresa.Image)" width="150px" />
+                }
+                <input asp-for="postedFile" type="file" class="form-control" />
+                <span asp-validation-for="Empresa.Image" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Empresa.Id" />
+            <input type="hidden" asp-for="Empresa.Image" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

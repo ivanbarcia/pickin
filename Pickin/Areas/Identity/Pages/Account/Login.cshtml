@@ -1,0 +1,56 @@
+﻿@page
+@model LoginModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Pickin | Log in";
+}
+
+<link rel="stylesheet" href="~/css/bootstrap.css" type='text/css' />
+<link rel="stylesheet" href="~/css/font-awesome.css" type='text/css' />
+<link rel="stylesheet" href="~/css/animate.css" type='text/css' />
+<link rel="stylesheet" href="~/css/style.css" type='text/css' />
+
+<body class="gray-bg">
+
+    <div class="middle-box loginscreen  animated fadeInDown">
+        <div style="padding-top:120px">
+            <div class="text-center">
+                <h1 class="logo-name"><img src="~/images/logo color.png" /></h1>
+            </div>
+            <br />
+            <br />
+            <h3 class="text-center">Bienvenido a su plataforma de inversiones</h3>
+
+            <form id="account" method="post">
+
+                <div class="form-group">
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div style="color:red">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary block full-width m-b">Iniciar sesión</button>
+                </div>
+            </form>
+            <div class="form-group" style="text-align: center">
+                <p>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Olvido su contraseña?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

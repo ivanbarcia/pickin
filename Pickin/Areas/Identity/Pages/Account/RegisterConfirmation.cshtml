@@ -1,0 +1,49 @@
+﻿@page
+@model RegisterConfirmationModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Pickin | Register confirmation";
+}
+
+<link rel="stylesheet" href="~/css/bootstrap.css" type='text/css' />
+<link rel="stylesheet" href="~/css/font-awesome.css" type='text/css' />
+<link rel="stylesheet" href="~/css/animate.css" type='text/css' />
+<link rel="stylesheet" href="~/css/style.css" type='text/css' />
+
+<body class="gray-bg">
+
+    <div class="middle-box loginscreen  animated fadeInDown">
+        <div style="padding-top:120px">
+            <div class="text-center">
+                @if (Model.EmpresaImage != null)
+                {
+                    <h1 class="logo-name"><img src="data:image/jpg;base64,@Convert.ToBase64String(Model.EmpresaImage)" /></h1>
+                }
+                else
+                {
+                    <h1 class="logo-name"><img src="~/images/logo color.png" /></h1>
+                }
+            </div>
+            <br />
+            <br />
+
+            @if (@Model.DisplayConfirmAccountLink)
+            {
+                <p>
+                    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
+                    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
+                </p>
+            }
+            else
+            {
+                <h3 class="text-center">Por favor revise su email para confirmar la cuenta..</h3>
+            }
+        </div>
+    </div>
+
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

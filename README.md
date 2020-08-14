@@ -1,2 +1,2 @@
-# pickin
-Pickin Now!
+# Pickin
+Pickin

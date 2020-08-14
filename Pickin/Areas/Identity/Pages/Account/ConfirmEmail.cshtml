@@ -1,0 +1,47 @@
+﻿@page
+@model ConfirmEmailModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Pickin | Confirm email";
+}
+
+<link rel="stylesheet" href="~/css/bootstrap.css" type='text/css' />
+<link rel="stylesheet" href="~/css/font-awesome.css" type='text/css' />
+<link rel="stylesheet" href="~/css/animate.css" type='text/css' />
+<link rel="stylesheet" href="~/css/style.css" type='text/css' />
+
+<body class="gray-bg">
+
+    <div class="middle-box loginscreen  animated fadeInDown">
+        <div style="padding-top:120px">
+            <div class="text-center">
+                @if (Model.Empresa.Image != null)
+                {
+                    <h1 class="logo-name"><img src="data:image/jpg;base64,@Convert.ToBase64String(Model.Empresa.Image)" /></h1>
+                }
+                else
+                {
+                    <h1 class="logo-name"><img src="~/images/logo color.png" /></h1>
+                }
+            </div>
+            <br />
+            <br />
+            <h3 class="text-center">Su usuario fue validado exitosamente.</h3>
+
+            @if (Model.Empresa.Image != null)
+            {
+                <h4 class="text-center">Por favor <a asp-page="./Front_Login" asp-route-id="@Model.Empresa.Id">haga click aqui para hacer log in</a>..</h4>
+            }
+            else
+            {
+                <h4 class="text-center">Por favor <a asp-page="./Login">haga click aqui para hacer log in</a>..</h4>
+            }
+        </div>
+    </div>
+
+</body>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

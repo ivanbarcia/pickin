@@ -1,0 +1,84 @@
+﻿@page
+@model Pickin.Pages.Pedidos.CreateModel
+
+@{
+    ViewData["Title"] = "Pickin | Create";
+}
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h1>Hace tu pedido</h1>
+                </div>
+                <div class="ibox-content">
+                    <form method="post">
+                        <div class="form-horizontal">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div id="vertical-timeline" class="vertical-container dark-timeline">
+                                @foreach (var item in Model.Productos)
+                                {
+                                    <div>
+                                        <div style="display:none">@item.Id</div>
+                                        <div style="text-align:center" class="client-avatar">
+                                            @if (item.Image != null)
+                                            {
+                                                <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" />
+                                            }
+                                            else
+                                            {
+                                                <img alt="@item.Id" class="img-circle" src="~/images/Tipito.svg" />
+                                            }
+                                        </div>
+                                        <div>
+                                            <a data-toggle="tab" class="product-link">@item.Nombre</a>
+                                            <br /><small> @item.Descripcion</small> @*<span class="input-group-text text-success font-weight-bold">✓</span>*@
+                                        </div>
+                                        <div style="text-align:center"> @item.Precio</div>
+                                        <div style="text-align:right"> @item.Stock</div>
+                                        <div>
+                                            <a asp-page="./Delete" asp-route-id="@item.Id"><i class="fa fa-trash-o"></i></a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Pedido.Cantidad" class="control-label col-md-2"></label>
+                                <div class="input-group date col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input asp-for="Pedido.Cantidad" class="form-control" />
+                                    <span asp-validation-for="Pedido.Cantidad" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Pedido.Total" class="control-label col-md-2"></label>
+                                <div class="input-group col-md-8">
+                                    <span class="input-group-addon"><strong>U$S</strong></span>
+                                    <input asp-for="Pedido.Total" class="form-control" />
+                                    <span asp-validation-for="Pedido.Total" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Pedido.Fecha" class="control-label col-md-2"></label>
+                                <div class="input-group date col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input asp-for="Pedido.Fecha" class="form-control" />
+                                    <span asp-validation-for="Pedido.Fecha" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-group">
+                                <div class="col-md-offset-1">
+                                    <input type="submit" value="Aceptar" class="btn btn-primary" />
+                                    <a asp-page="/Pedido/Index" class="btn btn-white">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
