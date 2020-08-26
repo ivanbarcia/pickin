@@ -20,10 +20,10 @@
                 @Html.DisplayNameFor(model => model.Pedidos[0].Fecha)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedidos[0].Cantidad)
+                @Html.DisplayNameFor(model => model.Pedidos[0].CantidadTotal)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pedidos[0].Total)
+                @Html.DisplayNameFor(model => model.Pedidos[0].MontoTotal)
             </th>
             <th></th>
         </tr>
@@ -38,10 +38,10 @@
                 @Html.DisplayFor(modelItem => item.Fecha)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cantidad)
+                @Html.DisplayFor(modelItem => item.CantidadTotal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Total)
+                @Html.DisplayFor(modelItem => item.MontoTotal)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

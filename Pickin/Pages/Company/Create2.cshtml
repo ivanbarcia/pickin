@@ -1,0 +1,507 @@
+﻿@page
+@model Pickin.Pages.Company.Create2Model
+
+@{
+    ViewData["Title"] = "Pickin | Create";
+    //Layout = null;
+}
+
+<!-- Include SmartWizard CSS -->
+<link href="~/lib/plugins/jquery-smartwizard-master/dist/css/smart_wizard_all.css" rel="stylesheet" type="text/css" />
+
+<!-- Demo Page Style - You don't need -->
+<style>
+    body {
+        padding-right: 5%;
+        padding-left: 5%;
+    }
+</style>
+
+<br />
+<p>
+    <label>Theme:</label>
+    <select id="theme_selector">
+        <option value="default">Default</option>
+        <option value="arrows" selected>Arrows</option>
+        <option value="dots">Dots</option>
+        <option value="progress">Progress</option>
+    </select>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" id="dark_mode" value="1" />
+    <label for="dark_mode">Dark Mode</label>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="checkbox" id="is_justified" value="1" checked />
+    <label for="is_justified">Justified</label>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Animation:</label>
+    <select id="animation">
+        <option value="none">None</option>
+        <option value="fade">Fade</option>
+        <option value="slide-horizontal" selected>Slide Horizontal</option>
+        <option value="slide-vertical">Slide Vertical</option>
+        <option value="slide-swing">Slide Swing</option>
+    </select>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Go To:</label>
+    <select id="got_to_step">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label>External Buttons:</label>
+    <button class="btn btn-secondary" id="prev-btn" type="button">Go Previous</button>
+    <button class="btn btn-secondary" id="next-btn" type="button">Go Next</button>
+    <button class="btn btn-danger" id="reset-btn" type="button">Reset Wizard</button>
+</p>
+<br />
+
+
+<!-- SmartWizard html -->
+<div id="smartwizard">
+
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#step-1">
+                <strong>Step 1</strong> <br>Datos
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#step-2">
+                <strong>Step 2</strong> <br>Productos
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#step-3">
+                <strong>Step 3</strong> <br>Confirmacióon
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#step-4">
+                <strong>Step 4</strong> <br>Enviar
+            </a>
+        </li>
+    </ul>
+
+    <form id="form" method="post" class="wizard-big">
+        <div class="tab-content">
+            <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+                <h3>Datos del Envio</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <span id="error" style="color:red"></span>
+                <div class="row">
+                    <div class="ibox-content">
+                        <div class="table-responsive">
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label asp-for="Input.Nombre" class="control-label col-md-2"></label>
+                                    <div class="input-group date col-md-8">
+                                        <input asp-for="Input.Nombre" class="form-control required" />
+                                        <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.Apellido" class="control-label col-md-2"></label>
+                                    <div class="input-group col-md-8">
+                                        <input asp-for="Input.Apellido" class="form-control required" />
+                                        <span asp-validation-for="Input.Apellido" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.Direccion" class="control-label col-md-2"></label>
+                                    <div class="input-group date col-md-8">
+                                        <input asp-for="Input.Direccion" class="form-control required" />
+                                        <span asp-validation-for="Input.Direccion" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.DireccionNro" class="control-label col-md-2"></label>
+                                    <div class="input-group date col-md-8">
+                                        <input asp-for="Input.DireccionNro" class="form-control required" />
+                                        <span asp-validation-for="Input.DireccionNro" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.Piso" class="control-label col-md-2"></label>
+                                    <div class="input-group date col-md-8">
+                                        <input asp-for="Input.Piso" class="form-control" />
+                                        <span asp-validation-for="Input.Piso" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.Depto" class="control-label col-md-2"></label>
+                                    <div class="input-group date col-md-8">
+                                        <input asp-for="Input.Depto" class="form-control" />
+                                        <span asp-validation-for="Input.Depto" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Input.Entrecalles" class="control-label col-md-2"></label>
+                                    <div class="input-group date col-md-8">
+                                        <input asp-for="Input.Entrecalles" class="form-control" />
+                                        <span asp-validation-for="Input.Entrecalles" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*<div class="col-lg-4">
+                                    <div class="text-center">
+                                        <div style="margin-top: 20px">
+                                            <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+                <h3>Lista de Productos</h3>
+                <div class="row">
+                    @foreach (var item in Model.Productos)
+                    {
+                        <div class="ibox-content">
+                            <div class="table-responsive">
+                                <table class="table shoping-cart-table">
+                                    <tbody>
+                                        <tr>
+                                            <td width="90">
+                                                <div class="cart-product-imitation">
+                                                    @if (item.Image != null)
+                                                    {
+                                                        <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img alt="@item.Id" class="img-circle" src="~/images/Tipito.svg" />
+                                                    }
+                                                </div>
+                                            </td>
+                                            <td class="desc">
+                                                <h3>
+                                                    <a href="#" class="text-navy">
+                                                        @item.Nombre
+                                                    </a>
+                                                </h3>
+                                                <p class="small">
+                                                    @item.Descripcion
+                                                </p>
+                                                <p>
+                                                    $@item.Precio
+                                                    @*<s class="small text-muted">$@item.Precio</s>*@
+                                                </p>
+                                            <td width="60">
+                                                <input id="@item.Id" asp-for="@item.Cantidad" type="text" class="form-control myProducts" style="text-align: right" placeholder="0" onchange="UpdateAmount($(this)[0].id, $(this).val(), @item.Precio);">
+                                            </td>
+                                            <td>
+                                                <h4>
+                                                    <label id="Amount_@item.Id" style="font-size: 20px;"></label>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+                <h3>Enviar Mensaje al Vendedor</h3>
+                <div class="row">
+                    <label> Hola! Este es el pedido XXXX de DELIVERY. A nombre de: <label id="Apellido"></label>, <label id="Nombre"></label>. Dirección de envío: @Model.Input.Direccion @Model.Input.DireccionNro @Model.Input.Piso / @Model.Input.Depto. Entre calles: @Model.Input.Entrecalles.</label>
+
+                    <label> Detalle del pedido:</label>
+
+                    @foreach (var item in Model.Productos.Where(x => x.Cantidad > 0))
+                    {
+                        <span>
+                            ($@item.Precio) @item.Cantidad x @item.Descripcion
+                        </span>
+                    }
+
+                    <label>Total Pedido: $ @Model.Input.MontoTotal</label>
+                </div>
+                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">Los datos cargados son correctos?</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<br /> &nbsp;
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="~/lib/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- Include jQuery -->
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery-3.5.0.min.js"></script>
+
+    <!-- Include SmartWizard JavaScript source -->
+    <script type="text/javascript" src="~/lib/plugins/jquery-smartwizard-master/dist/js/jquery.smartWizard.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/metisMenu/metisMenu.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script type="text/javascript">
+
+        function UpdateAmount(id, cantidad, precio) {
+            if (cantidad > 0) {
+                $("#Amount_" + id).text("$" + (cantidad * precio));
+            }
+        };
+
+        function validateAllSteps() {
+            var isStepValid = true;
+
+            if (validateStep1() == false) {
+                isStepValid = false;
+                //$('#wizard').smartWizard('setError', {
+                //    stepnum: 1,
+                //    iserror: true
+                //});
+            } else {
+                //$('#wizard').smartWizard('setError', {
+                //    stepnum: 1,
+                //    iserror: false
+                //});
+            }
+
+            if (validateStep3() == false) {
+                isStepValid = false;
+                //$('#wizard').smartWizard('setError', {
+                //    stepnum: 3,
+                //    iserror: true
+                //});
+            } else {
+                //$('#wizard').smartWizard('setError', {
+                //    stepnum: 3,
+                //    iserror: false
+                //});
+            }
+
+            if (!isStepValid) {
+                $('#wizard').smartWizard('showMessage', 'Please correct the errors the steps and continue');
+            }
+
+            return isStepValid;
+        }
+
+        function validateSteps(step) {
+            var isStepValid = true;
+            // validate step 1
+            if (step == 0) {
+                if (validateStep1() == false) {
+                    isStepValid = false;
+                    //$('#wizard').smartWizard('showMessage', 'Please correct the errors in step' + step + ' and click next.');
+                    //$('#wizard').smartWizard('setError', {
+                    //    stepnum: step,
+                    //    iserror: true
+                    //});
+                } else {
+                    //$('#wizard').smartWizard('setError', {
+                    //    stepnum: step,
+                    //    iserror: false
+                    //});
+                }
+            }
+
+            // validate step 3
+            if (step == 2) {
+                if (validateStep3() == false) {
+                    isStepValid = false;
+                    //$('#wizard').smartWizard('showMessage', 'Please correct the errors in step' + step + ' and click next.');
+                    //$('#wizard').smartWizard('setError', {
+                    //    stepnum: step,
+                    //    iserror: true
+                    //});
+                } else {
+                    //$('#wizard').smartWizard('setError', {
+                    //    stepnum: step,
+                    //    iserror: false
+                    //});
+                }
+            }
+
+            return isStepValid;
+        }
+
+        function validateStep1() {
+            //return $(this).valid();
+            if ($("#Input_Nombre").val() == "") {
+                $("#error").val("Ingrese Nombre");
+                return false;
+            }
+
+            if ($("#Input_Apellido").val() == "") {
+                $("#error").val("Ingrese Apelido");
+                return false;
+            }
+
+            if ($("#Input_Direccion").val() == "") {
+                $("#error").val("Ingrese Direccion");
+                return false;
+            }
+
+            if ($("#Input_DireccionNro").val() == "") {
+                $("#error").val("Ingrese Direccion Nro");
+                return false;
+            }
+
+            return true;
+        }
+
+        $(document).ready(function () {
+
+            // Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('Finish')
+                .addClass('btn btn-info')
+                .on('click', function () { alert('Finish Clicked'); });
+            var btnCancel = $('<button></button>').text('Cancel')
+                .addClass('btn btn-danger')
+                .on('click', function () { $('#smartwizard').smartWizard("reset"); });
+
+            // Step show event
+            $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+                $("#prev-btn").removeClass('disabled');
+                $("#next-btn").removeClass('disabled');
+                if (stepPosition === 'first') {
+                    $("#prev-btn").addClass('disabled');
+                } else if (stepPosition === 'last') {
+                    $("#next-btn").addClass('disabled');
+                } else {
+                    $("#prev-btn").removeClass('disabled');
+                    $("#next-btn").removeClass('disabled');
+                }
+            });
+
+            // Initialize the leaveStep event
+            $("#smartwizard").on("leaveStep", function (e, anchorObject, currentStepIndex, nextStepIndex, stepDirection) {
+                return validateSteps(currentStepIndex);
+            });
+
+            // Smart Wizard
+            $('#smartwizard').smartWizard({
+                selected: 0,
+                theme: 'dots', // default, arrows, dots, progress
+                // darkMode: true,
+                transition: {
+                    animation: 'slide-horizontal', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+                },
+                toolbarSettings: {
+                    toolbarPosition: 'both', // both bottom
+                    toolbarExtraButtons: [btnFinish, btnCancel]
+                }
+            });
+
+            function onFinishCallback() {
+                if (validateAllSteps()) {
+                    $('form').submit();
+                }
+            }
+
+            $("#sw-btn-next").on("click", function () {
+                debugger;
+                var form = $(this);
+
+                // Clean up if user went backward before
+                if (currentIndex < newIndex) {
+                    // To remove error styles
+                    $(".body:eq(" + newIndex + ") label.error", form).remove();
+                    $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                }
+
+                // Disable validation on fields that are disabled or hidden.
+                form.validate().settings.ignore = ":disabled,:hidden";
+
+                // Start validation; Prevent going forward if false
+                if (form.valid()) {
+                    // Navigate next
+                    $('#smartwizard').smartWizard("next");
+                    return true;
+                }
+
+                return false;
+            });
+
+            // External Button Events
+            $("#reset-btn").on("click", function () {
+                // Reset wizard
+                $('#smartwizard').smartWizard("reset");
+                return true;
+            });
+
+            $("#prev-btn").on("click", function () {
+                // Navigate previous
+                $('#smartwizard').smartWizard("prev");
+                return true;
+            });
+
+            $("#next-btn").on("click", function () {
+                // Navigate next
+                $('#smartwizard').smartWizard("next");
+                return true;
+            });
+
+
+            // Demo Button Events
+            $("#got_to_step").on("change", function () {
+                // Go to step
+                var step_index = $(this).val() - 1;
+                $('#smartwizard').smartWizard("goToStep", step_index);
+                return true;
+            });
+
+
+            $("#dark_mode").on("click", function () {
+                // Change dark mode
+                var options = {
+                    darkMode: $(this).prop("checked")
+                };
+
+                $('#smartwizard').smartWizard("setOptions", options);
+                return true;
+            });
+
+            $("#is_justified").on("click", function () {
+                // Change Justify
+                var options = {
+                    justified: $(this).prop("checked")
+                };
+
+                $('#smartwizard').smartWizard("setOptions", options);
+                return true;
+            });
+
+            $("#animation").on("change", function () {
+                // Change theme
+                var options = {
+                    transition: {
+                        animation: $(this).val()
+                    },
+                };
+                $('#smartwizard').smartWizard("setOptions", options);
+                return true;
+            });
+
+            $("#theme_selector").on("change", function () {
+                // Change theme
+                var options = {
+                    theme: $(this).val()
+                };
+                $('#smartwizard').smartWizard("setOptions", options);
+                return true;
+            });
+
+        });
+    </script>
+}

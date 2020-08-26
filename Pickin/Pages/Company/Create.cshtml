@@ -1,0 +1,308 @@
+﻿@page
+@model Pickin.Pages.Company.CreateModel
+
+@{
+    ViewData["Title"] = "Pickin | Create";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Completar datos</h5>
+                </div>
+                <div class="ibox-content">
+                    <h2>
+                        Datos de envio
+                    </h2>
+                    <p>
+                        Ingrese los datos a donde desea enviar los productos.
+                    </p>
+
+                    <form id="form" method="post" class="wizard-big">
+                        <h1>Datos</h1>
+                        <fieldset>
+                            <h2>Datos de Envio</h2>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label asp-for="Input.Nombre" class="control-label col-md-2"></label>
+                                        <div class="input-group date col-md-8">
+                                            <input asp-for="Input.Nombre" class="form-control required" />
+                                            <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Apellido" class="control-label col-md-2"></label>
+                                        <div class="input-group col-md-8">
+                                            <input asp-for="Input.Apellido" class="form-control required" />
+                                            <span asp-validation-for="Input.Apellido" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Direccion" class="control-label col-md-2"></label>
+                                        <div class="input-group date col-md-8">
+                                            <input asp-for="Input.Direccion" class="form-control required" />
+                                            <span asp-validation-for="Input.Direccion" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.DireccionNro" class="control-label col-md-2"></label>
+                                        <div class="input-group date col-md-8">
+                                            <input asp-for="Input.DireccionNro" class="form-control required" />
+                                            <span asp-validation-for="Input.DireccionNro" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Piso" class="control-label col-md-2"></label>
+                                        <div class="input-group date col-md-8">
+                                            <input asp-for="Input.Piso" class="form-control" />
+                                            <span asp-validation-for="Input.Piso" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Depto" class="control-label col-md-2"></label>
+                                        <div class="input-group date col-md-8">
+                                            <input asp-for="Input.Depto" class="form-control" />
+                                            <span asp-validation-for="Input.Depto" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="Input.Entrecalles" class="control-label col-md-2"></label>
+                                        <div class="input-group date col-md-8">
+                                            <input asp-for="Input.Entrecalles" class="form-control" />
+                                            <span asp-validation-for="Input.Entrecalles" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-4">
+                                        <div class="text-center">
+                                            <div style="margin-top: 20px">
+                                                <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+
+                        </fieldset>
+                        <h1>Productos</h1>
+                        <fieldset>
+                            <h2>Lista de Productos</h2>
+                            <div class="row">
+                                @foreach (var item in Model.Productos)
+                                {
+                                    <div class="ibox-content">
+                                        <div class="table-responsive">
+                                            <table class="table shoping-cart-table">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="90">
+                                                            <div class="cart-product-imitation">
+                                                                @if (item.Image != null)
+                                                                {
+                                                                    <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img alt="@item.Id" class="img-circle" src="~/images/Tipito.svg" />
+                                                                }
+                                                            </div>
+                                                        </td>
+                                                        <td class="desc">
+                                                            <h3>
+                                                                <a href="#" class="text-navy">
+                                                                    @item.Nombre
+                                                                </a>
+                                                            </h3>
+                                                            <p class="small">
+                                                                @item.Descripcion
+                                                            </p>
+                                                            <p>
+                                                                $@item.Precio
+                                                                @*<s class="small text-muted">$@item.Precio</s>*@
+                                                            </p>
+                                                        <td width="60">
+                                                            <input id="@item.Id" asp-for="@item.Cantidad" type="text" class="form-control myProducts" style="text-align: right" onchange="UpdateAmount($(this)[0].id, $(this).val(), '@item.Precio', '@item.Descripcion');">
+                                                        </td>
+                                                        <td>
+                                                            <h4>
+                                                                <label id="Amount_@item.Id" style="font-size: 20px;"></label>
+                                                            </h4>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </fieldset>
+
+                        <h1>Enviar</h1>
+                        <fieldset>
+                            <h2>Enviar Mensaje al Vendedor</h2>
+                            <div class="row">
+                                <div class="ibox-content">
+                                    <span> Hola! Este es el pedido XXXX de DELIVERY. </span>
+                                    <br />
+                                    <br />
+                                    <span>A nombre de: <label id="Apellido"></label>, <label id="Nombre"></label>. </span>
+                                    <br />
+                                    <br />
+                                    <span>Dirección de envío: <label id="Direccion"></label> <label id="DireccionNro"></label> </span> 
+                                    <br />
+                                    <span>Aclaracion: <label id="Piso"></label> / <label id="Depto"></label>. </span>
+                                    <br />
+                                    <span>Entre calles: <label id="Entrecalles"></label>.</span>
+                                    <br />
+                                    <br />
+                                    <span> Detalle del pedido:</span>
+                                    <br />
+                                    <div id="outerdiv"></div>
+                                    @foreach (var item in Model.Productos.Where(x => x.Cantidad > 0))
+                                    {
+                                        <span>
+                                            ($@item.Precio) @item.Cantidad x @item.Descripcion
+                                        </span>
+                                        <br />
+                                    }
+                                    <br />
+                                    <label>Total Pedido: $<label id="MontoTotal"></label></label>
+                                </div>
+                            </div>
+                            <label for="acceptTerms">Los datos cargados son correctos?</label> <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+                        </fieldset>
+
+                        <input type="hidden" asp-for="Input.ProductosId" />
+                        <input type="hidden" asp-for="Input.ProductosCantidad" />
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/plugins/iCheck/custom.css" type='text/css' />
+<link rel="stylesheet" href="~/css/plugins/steps/jquery.steps.css" type='text/css' />
+<link rel="stylesheet" href="~/lib/plugins/jquery-ui/jquery-ui.min.css" type='text/css' />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="~/lib/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/iCheck/icheck.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/staps/jquery.steps.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/metisMenu/metisMenu.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script type="text/javascript">
+
+        function UpdateAmount(id, cantidad, precio, texto) {
+            if (cantidad > 0) {
+                var totalAmount = (cantidad * parseFloat(precio).toFixed(2));
+                $("#Amount_" + id).text("$" + totalAmount);
+
+                // APPEND TO MESSAGE
+                var text = ('($' + precio + ') ' + cantidad + ' x ' + texto);
+                $('#outerdiv').append('<div id="innerdiv">' + text + '</div>');
+
+                var total = 0.00;
+                if ($("#MontoTotal").text() != "") {
+                    total = parseFloat($("#MontoTotal").text());
+                }
+
+                debugger;
+                total = (total + totalAmount);
+                $("#MontoTotal").text(total);
+            }
+        };
+
+        $(document).ready(function () {
+
+            $("#wizard").steps();
+            $("#form").steps({
+                bodyTag: "fieldset",
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+
+                    var form = $(this);
+
+                    // Clean up if user went backward before
+                    if (currentIndex < newIndex) {
+                        // To remove error styles
+                        $(".body:eq(" + newIndex + ") label.error", form).remove();
+                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                    }
+
+                    // Disable validation on fields that are disabled or hidden.
+                    form.validate().settings.ignore = ":disabled,:hidden";
+
+                    // Start validation; Prevent going forward if false
+                    return form.valid();
+                },
+                onStepChanged: function (event, currentIndex, priorIndex) {
+                    //// Suppress (skip) "Warning" step if the user is old enough.
+                    //if (currentIndex === 2) {
+                    //    $(this).steps("next");
+                    //}
+
+                    //// Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                    //if (currentIndex === 2 && priorIndex === 3) {
+                    //    $(this).steps("previous");
+                    //}
+
+                    if (currentIndex === 2) {
+                        $("#Nombre").text($("#Input_Nombre").val());
+                        $("#Apellido").text($("#Input_Apellido").val());
+                        $("#Direccion").text($("#Input_Direccion").val());
+                        $("#DireccionNro").text($("#Input_DireccionNro").val());
+                        $("#Piso").text($("#Input_Piso").val());
+                        $("#Depto").text($("#Input_Depto").val());
+                        $("#Entrecalles").text($("#Input_Entrecalles").val());
+                        
+                        var arrId = [];
+                        var arrVal = [];
+                        $('.myProducts').each(function () {
+                            if ($(this).val() > 0) {
+                                arrId.push($(this)[0].id);
+                                arrVal.push($(this).val());
+                            }
+                        });
+
+                        $("#Input_ProductosId").val(arrId);
+                        $("#Input_ProductosCantidad").val(arrVal);
+                    }
+                },
+                onFinishing: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                errorPlacement: function (error, element) {
+                    element.before(error);
+                }
+            });
+
+        });
+    </script>
+}

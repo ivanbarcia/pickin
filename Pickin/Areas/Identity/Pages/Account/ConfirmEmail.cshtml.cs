@@ -50,10 +50,7 @@ namespace Pickin.Areas.Identity.Pages.Account
             var result = await _userManager.ConfirmEmailAsync(user, code);
             StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
 
-            if (!user.InternalUser)
-            {
-                Empresa = _context.Empresa.FindAsync(user.EmpresaId).Result;
-            }
+            Empresa = _context.Empresa.FindAsync(user.EmpresaId).Result;
 
             //if (result.Succeeded)
             //{

@@ -85,18 +85,23 @@
     </div>
 </div>
 
-<script type="text/javascript" src="~/lib/plugins/slick/slick.min.js"></script>
-
 <link rel="stylesheet" href="~/css/plugins/slick/slick.css" type='text/css' />
 <link rel="stylesheet" href="~/css/plugins/slick/slick-theme.css" type='text/css' />
 
-<script type="text/javascript">
-    $(document).ready(function () {
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/slick/slick.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
 
 
-        $('.product-images').slick({
-            dots: true
+            $('.product-images').slick({
+                dots: true
+            });
+
         });
-
-    });
-</script>
+    </script>
+}

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="~/css/font-awesome.css" type='text/css' />
 
 </head>
-<body style="background-color:white !important" class="fixednavbar skin-1">
+<body style="background-color:white !important" class="boxed-layout">
 
     <!-- Skin configuration box -->
     @*<partial name="~/Pages/Shared/_SkinConfig.cshtml" />*@
@@ -36,13 +36,13 @@
         <div style="background-color:white !important" class="@ViewBag.SpecialClass">
 
             <!-- Top Navbar -->
-            <partial name="~/Pages/Shared/_Front_TopNavbar.cshtml" />
+            @*<partial name="~/Pages/Shared/_Front_TopNavbar.cshtml" />*@
 
             <!-- Main view  -->
             @RenderBody()
 
             <!-- Footer -->
-            @*<partial name="~/Pages/Shared/_Footer.cshtml" />*@
+            <partial name="~/Pages/Shared/_Footer.cshtml" />
 
         </div>
         <!-- End page wrapper-->

@@ -99,9 +99,9 @@
     </div>*@
 
 
-    <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-        
-        @*<div class="ibox-content m-b-sm border-bottom">
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+
+    @*<div class="ibox-content m-b-sm border-bottom">
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
@@ -134,120 +134,124 @@
             </div>
         </div>*@
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox">
-                    <div class="ibox-content">
-                        <div class="pull-right">
-                            <a asp-page="./Create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Agregar</a>
-                        </div>
-                        <h2>Productos</h2>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="pull-right">
+                        <a asp-page="./Create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Agregar</a>
+                    </div>
+                    <h2>Productos</h2>
 
-                        <hr />
-                        <div class="input-group">
-                            <input id="searchInput" type="text" placeholder="Buscar producto " class="input form-control" onkeyup="searchInversor()">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
-                            </span>
-                        </div>
-                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" id="productosTable">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th data-toggle="true">Nombre</th>
-                                    <th data-hide="all">Descripcion</th>
-                                    <th data-hide="phone">Precio</th>
-                                    <th data-hide="phone,tablet">Cantidad</th>
-                                    <th data-hide="phone">Estado</th>
-                                    <th class="text-right" data-sort-ignore="true">Acción</th>
+                    <hr />
+                    <div class="input-group">
+                        <input id="searchInput" type="text" placeholder="Buscar producto " class="input form-control" onkeyup="searchInversor()">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+                        </span>
+                    </div>
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" id="productosTable">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th data-toggle="true">Nombre</th>
+                                <th data-hide="all">Descripcion</th>
+                                <th data-hide="phone">Precio</th>
+                                <th data-hide="phone,tablet">Cantidad</th>
+                                <th data-hide="phone">Estado</th>
+                                <th class="text-right" data-sort-ignore="true">Acción</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Productos)
-                                {
-                                    <tr>
-                                        <td>
-                                            @if (item.Image != null)
-                                            {
-                                                <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" />
-                                            }
-                                            else
-                                            {
-                                                <img alt="@item.Id" class="img-circle" src="~/images/Tipito.svg" />
-                                            }
-                                        </td>
-                                        <td>
-                                            @item.Nombre
-                                        </td>
-                                        <td>
-                                            @item.Descripcion
-                                        </td>
-                                        <td>
-                                            $@item.Precio
-                                        </td>
-                                        <td>
-                                            @item.Stock
-                                        </td>
-                                        <td>
-                                            <span class="label label-primary">Enable</span>
-                                        </td>
-                                        <td class="text-right">
-                                            <div class="btn-group">
-                                                <a asp-page="./Details" asp-route-id="@item.Id" class="btn-white btn btn-xs">Detalle</a>
-                                                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-white btn btn-xs">Editar</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                            <tfoot>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Productos)
+                            {
                                 <tr>
-                                    <td colspan="6">
-                                        <ul class="pagination pull-right"></ul>
+                                    <td>
+                                        @if (item.Image != null)
+                                        {
+                                            <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" />
+                                        }
+                                        else
+                                        {
+                                            <img alt="@item.Id" class="img-circle" src="~/images/Tipito.svg" />
+                                        }
+                                    </td>
+                                    <td>
+                                        @item.Nombre
+                                    </td>
+                                    <td>
+                                        @item.Descripcion
+                                    </td>
+                                    <td>
+                                        $@item.Precio
+                                    </td>
+                                    <td>
+                                        @item.Stock
+                                    </td>
+                                    <td>
+                                        <span class="label label-primary">Enable</span>
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="btn-group">
+                                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn-white btn btn-xs">Detalle</a>
+                                            <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-white btn btn-xs">Editar</a>
+                                        </div>
                                     </td>
                                 </tr>
-                            </tfoot>
-                        </table>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="~/lib/plugins/footable/footable.all.min.js"></script>
+</div>
 
 <link rel="stylesheet" href="~/css/plugins/footable/footable.core.css" type='text/css' />
 
-<script type="text/javascript">
-    $(document).ready(function () {
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-        $('.footable').footable();
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/footable/footable.all.min.js"></script>
 
-    });
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-    function searchInversor() {
-        // Declare variables
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("searchInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("productosTable");
-        tr = table.getElementsByTagName("tr");
+            $('.footable').footable();
 
-        // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
+        });
+
+        function searchInversor() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("productosTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
                 }
             }
         }
-    }
-</script>
+    </script>
 
+}

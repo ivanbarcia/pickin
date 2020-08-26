@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Pickin.Models;
 
-namespace Pickin.Pages.Pedidos
+namespace Pickin.Pages.Company
 {
     public class CartModel : PageModel
     {
@@ -21,14 +21,17 @@ namespace Pickin.Pages.Pedidos
 
         public IList<Producto> Productos { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string company)
         {
-            var _empresaId = Convert.ToInt32(User.FindFirst("EmpresaId").Value);
+            var empresa = await _context.Empresa.FirstOrDefaultAsync(x => x.Codigo == company);
 
-            Productos = await _context.Producto
-                .Include(i => i.Empresa)
-                .Where(x => x.EmpresaId == _empresaId)
-                .ToListAsync();
+            if (empresa != null)
+            {
+                Productos = await _context.Producto
+                    .Include(i => i.Empresa)
+                    .Where(x => x.EmpresaId == empresa.Id)
+                    .ToListAsync();
+            }
         }
     }
 }

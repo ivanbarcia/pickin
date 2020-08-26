@@ -36,10 +36,10 @@ namespace Pickin.Pages.Pedidos
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            Pedido.Total = Convert.ToDecimal(Pedido.Total.ToString().Replace(",", ""));
+            Pedido.MontoTotal = Convert.ToDecimal(Pedido.MontoTotal.ToString().Replace(",", ""));
 
-            if (Pedido.Total <= 0)
-                ModelState.AddModelError("Pedido.Total", "Debe ingresar un valor mayor a 0");
+            if (Pedido.MontoTotal <= 0)
+                ModelState.AddModelError("Pedido.MontoTotal", "Debe ingresar un valor mayor a 0");
 
             var _empresaId = Convert.ToInt32(User.FindFirst("EmpresaId").Value);
 

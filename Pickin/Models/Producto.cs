@@ -18,6 +18,9 @@ namespace Pickin.Models
         [Required(ErrorMessage = "Debe ingresar un valor")]
         public decimal Precio { get; set; }
 
+        [NotMapped]
+        public int Cantidad { get; set; }
+
         [Required(ErrorMessage = "Debe ingresar un valor")]
         public int Stock { get; set; }
 

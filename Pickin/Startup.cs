@@ -46,9 +46,7 @@ namespace Pickin
                 .AddRazorRuntimeCompilation()
                 .AddRazorPagesOptions(options =>
                 {
-                    options.Conventions.AuthorizePage("/Index");
-                    options.Conventions.AuthorizePage("/Inversores/Index");
-                    options.Conventions.AuthorizePage("/Obras/Index");
+                    //options.Conventions.AuthorizePage("/Index");
                 });
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
