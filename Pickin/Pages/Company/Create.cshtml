@@ -161,13 +161,6 @@
                                     <span> Detalle del pedido:</span>
                                     <br />
                                     <div id="outerdiv"></div>
-                                    @foreach (var item in Model.Productos.Where(x => x.Cantidad > 0))
-                                    {
-                                        <span>
-                                            ($@item.Precio) @item.Cantidad x @item.Descripcion
-                                        </span>
-                                        <br />
-                                    }
                                     <br />
                                     <label>Total Pedido: $<label id="MontoTotal"></label></label>
                                 </div>
@@ -216,7 +209,6 @@
                     total = parseFloat($("#MontoTotal").text());
                 }
 
-                debugger;
                 total = (total + totalAmount);
                 $("#MontoTotal").text(total);
             }
