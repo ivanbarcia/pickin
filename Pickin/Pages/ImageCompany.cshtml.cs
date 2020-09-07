@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Pickin.Data;
-using Pickin.Models;
 
 namespace Pickin.Pages
 {
@@ -19,17 +17,16 @@ namespace Pickin.Pages
             _context = context;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (User.FindFirst("EmpresaId") != null)
+            if (id == 0)
             {
-                // to get the user details to load user Image    
-                var company = await _context.Empresa.FindAsync(Convert.ToInt32(User.FindFirst("EmpresaId").Value));
-
-                return new FileContentResult(company.Image, "image/jpeg");
+                return new FileContentResult(null, "image/jpeg");
             }
 
-            return new FileContentResult(null, "image/jpeg");
+            var empresa = _context.Empresa.Find(id);
+
+            return new FileContentResult(empresa.Image, "image/jpeg");
         }
     }
 }

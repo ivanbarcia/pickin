@@ -108,8 +108,7 @@ namespace Pickin.Migrations
                     EmpresaId = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    Image = table.Column<byte[]>(nullable: true),
-                    InternalUser = table.Column<bool>(nullable: false)
+                    Image = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {

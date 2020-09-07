@@ -42,7 +42,7 @@ namespace Pickin.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Debe ingresar un Email")]
             [EmailAddress]
             public string Email { get; set; }
         }

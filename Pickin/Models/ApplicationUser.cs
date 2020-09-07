@@ -25,9 +25,6 @@ namespace Pickin.Models
 
         [Display(Name = "Avatar")]
         public byte[] Image { get; set; }
-
-        [Display(Name = "Internal User")]
-        public bool InternalUser { get; set; }
     }
 
     public static class IdentityExtensions

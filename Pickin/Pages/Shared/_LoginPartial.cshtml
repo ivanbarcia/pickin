@@ -15,10 +15,6 @@
                             {
                                 <img class="img-circle" src="@Url.Page("/Avatar", new { id = User.FindFirst("Id").Value })" width="30px" height="30px" />
                             }
-                            else
-                            {
-                                <img class="img-circle" src="~/images/Tipito.svg" width="30px" height="30px" />
-                            }
                             <strong style="margin-left: 10px;" class="font-bold">@User.Identity.Name</strong>
                         </span>
                     </a>

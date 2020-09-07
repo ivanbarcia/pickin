@@ -32,21 +32,7 @@ namespace Pickin.Areas.Identity.Pages.Account
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
 
-            if (Convert.ToBoolean(User.FindFirst("InternalUser").Value))
-            {
-                return RedirectToPage("./Login");
-            }
-
-            return RedirectToPage("./Front_Login", new { id = Convert.ToInt32(User.FindFirst("EmpresaId").Value) });
-
-            //if (returnUrl != null)
-            //{
-            //    return LocalRedirect(returnUrl);
-            //}
-            //else
-            //{
-            //    return RedirectToPage();
-            //}
+            return RedirectToPage("./Login");
         }
     }
 }

@@ -4,19 +4,5 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    if (User.Claims.Any())
-    {
-        if (Convert.ToBoolean(User.FindFirst("InternalUser").Value))
-        {
-            Layout = "/Pages/Shared/_Layout.cshtml";
-        }
-        else
-        {
-            Layout = "/Pages/Shared/_Front_Layout.cshtml";
-        }
-    }
-    else
-    {
-        Layout = "/Pages/Shared/_Layout.cshtml";
-    }
+    Layout = "/Pages/Shared/_Layout.cshtml";
 }

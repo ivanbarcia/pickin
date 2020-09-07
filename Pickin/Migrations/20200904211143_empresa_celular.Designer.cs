@@ -10,8 +10,8 @@ using Pickin.Data;
 namespace Pickin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200825215301_pedidos_precio4")]
-    partial class pedidos_precio4
+    [Migration("20200904211143_empresa_celular")]
+    partial class empresa_celular
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -238,10 +238,16 @@ namespace Pickin.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Celular")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Codigo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Estado")
@@ -300,6 +306,9 @@ namespace Pickin.Migrations
                     b.Property<string>("DireccionNro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Entrecalles")
                         .HasColumnType("nvarchar(max)");

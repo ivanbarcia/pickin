@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Pickin</title>
+    @await Html.PartialAsync("_Favicons")
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
 
     <link rel="stylesheet" href="~/css/site.css" type='text/css' />
@@ -64,8 +65,8 @@
     </script>
 
     <!-- Skin config script - only for demo purpose-->
-    <script type="text/javascript" src="~/lib/app/skin.config.min.js">
-    </script>
+    @*<script type="text/javascript" src="~/lib/app/skin.config.min.js">
+    </script>*@
 
     <!-- Handler for local scripts -->
     @RenderSection("scripts", required: false)

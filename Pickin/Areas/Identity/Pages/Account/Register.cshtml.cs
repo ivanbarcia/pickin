@@ -81,9 +81,6 @@ namespace Pickin.Areas.Identity.Pages.Account
             [Display(Name = "Confirmar Password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
-            [Display(Name = "Internal User")]
-            public bool InternalUser { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -100,7 +97,7 @@ namespace Pickin.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, EmpresaId = Input.OrganizationId, FirstName = Input.FirstName, LastName = Input.LastName, InternalUser = Input.InternalUser };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, EmpresaId = Input.OrganizationId, FirstName = Input.FirstName, LastName = Input.LastName };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

@@ -8,39 +8,25 @@
     //    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     //}
 
-    if (User.Claims.Any())
-    {
-        if (Convert.ToBoolean(User.FindFirst("InternalUser").Value))
-        {
-            Layout = "/Pages/Shared/_Layout.cshtml";
-        }
-        else
-        {
-            Layout = "/Pages/Shared/_Front_Layout.cshtml";
-        }
-    }
-    else
-    {
-        Layout = "/Pages/Shared/_Layout.cshtml";
-    }
+    Layout = "/Pages/Shared/_Layout.cshtml";
 }
 
-    <div style="padding-left: 30px; padding-bottom: 30px">
-        <h2>Administrador de cuenta</h2>
+<div style="padding-left: 30px; padding-bottom: 30px">
+    <h2>Administrador de cuenta</h2>
 
-        <div>
-            <h4>Cambie la configuración de su cuenta</h4>
-            <hr />
-            <div class="row">
-                <div class="col-md-3">
-                    <partial name="_ManageNav" />
-                </div>
-                <div class="col-md-9">
-                    @RenderBody()
-                </div>
+    <div>
+        <h4>Cambie la configuración de su cuenta</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-3">
+                <partial name="_ManageNav" />
+            </div>
+            <div class="col-md-9">
+                @RenderBody()
             </div>
         </div>
     </div>
+</div>
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

@@ -7,9 +7,14 @@ namespace Pickin.Models
     [Table("Empresas")]
     public class Empresa : AuditableEntity
     {
+        [Required]
         public string Codigo { get; set; }
 
+        [Required]
         public string Descripcion { get; set; }
+
+        [Required]
+        public string Celular { get; set; }
 
         [NotMapped]
         [ScaffoldColumn(false)]

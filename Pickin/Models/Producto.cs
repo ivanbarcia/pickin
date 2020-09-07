@@ -19,7 +19,7 @@ namespace Pickin.Models
         public decimal Precio { get; set; }
 
         [NotMapped]
-        public int Cantidad { get; set; }
+        public int? Cantidad { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un valor")]
         public int Stock { get; set; }

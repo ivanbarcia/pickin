@@ -3,140 +3,130 @@
 
 @{
     ViewData["Title"] = "Pickin | Create";
+    Layout = "/Pages/Shared/_Front_Layout.cshtml";
 }
+
+<link rel="stylesheet" href="~/css/mobile.css" type='text/css' />
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Completar datos</h5>
+                    <cache vary-by-user="true">
+                        <div class="pull-left" style="margin-bottom: 5px; margin-right: 10px;">
+                            <img src="@Url.Page("/ImageCompany", new { id = Model.Productos.FirstOrDefault().EmpresaId })"
+                                 style="object-fit: contain; height: 50px;" />
+                        </div>
+                    </cache>
+                    <div style="margin-top: 15px">
+                        <h5>@Model.Productos.FirstOrDefault().Empresa.Descripcion</h5>
+                    </div>
                 </div>
                 <div class="ibox-content">
-                    <h2>
-                        Datos de envio
-                    </h2>
-                    <p>
-                        Ingrese los datos a donde desea enviar los productos.
-                    </p>
-
+                    @*<h2>
+                            Datos de envio
+                        </h2>
+                        <p>
+                            Ingrese los datos a donde desea enviar los productos.
+                        </p>*@
+                    
                     <form id="form" method="post" class="wizard-big">
-                        <h1>Datos</h1>
-                        <fieldset>
-                            <h2>Datos de Envio</h2>
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="form-group">
-                                        <label asp-for="Input.Nombre" class="control-label col-md-2"></label>
-                                        <div class="input-group date col-md-8">
-                                            <input asp-for="Input.Nombre" class="form-control required" />
-                                            <span asp-validation-for="Input.Nombre" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Input.Apellido" class="control-label col-md-2"></label>
-                                        <div class="input-group col-md-8">
-                                            <input asp-for="Input.Apellido" class="form-control required" />
-                                            <span asp-validation-for="Input.Apellido" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Input.Direccion" class="control-label col-md-2"></label>
-                                        <div class="input-group date col-md-8">
-                                            <input asp-for="Input.Direccion" class="form-control required" />
-                                            <span asp-validation-for="Input.Direccion" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Input.DireccionNro" class="control-label col-md-2"></label>
-                                        <div class="input-group date col-md-8">
-                                            <input asp-for="Input.DireccionNro" class="form-control required" />
-                                            <span asp-validation-for="Input.DireccionNro" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Input.Piso" class="control-label col-md-2"></label>
-                                        <div class="input-group date col-md-8">
-                                            <input asp-for="Input.Piso" class="form-control" />
-                                            <span asp-validation-for="Input.Piso" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Input.Depto" class="control-label col-md-2"></label>
-                                        <div class="input-group date col-md-8">
-                                            <input asp-for="Input.Depto" class="form-control" />
-                                            <span asp-validation-for="Input.Depto" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Input.Entrecalles" class="control-label col-md-2"></label>
-                                        <div class="input-group date col-md-8">
-                                            <input asp-for="Input.Entrecalles" class="form-control" />
-                                            <span asp-validation-for="Input.Entrecalles" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                @*<div class="col-lg-4">
-                                        <div class="text-center">
-                                            <div style="margin-top: 20px">
-                                                <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
-                                            </div>
-                                        </div>
-                                    </div>*@
-                            </div>
-
-                        </fieldset>
                         <h1>Productos</h1>
                         <fieldset>
-                            <h2>Lista de Productos</h2>
                             <div class="row">
                                 @foreach (var item in Model.Productos)
                                 {
-                                    <div class="ibox-content">
-                                        <div class="table-responsive">
-                                            <table class="table shoping-cart-table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td width="90">
-                                                            <div class="cart-product-imitation">
-                                                                @if (item.Image != null)
-                                                                {
-                                                                    <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" />
-                                                                }
-                                                                else
-                                                                {
-                                                                    <img alt="@item.Id" class="img-circle" src="~/images/Tipito.svg" />
-                                                                }
-                                                            </div>
-                                                        </td>
-                                                        <td class="desc">
-                                                            <h3>
-                                                                <a href="#" class="text-navy">
-                                                                    @item.Nombre
-                                                                </a>
-                                                            </h3>
-                                                            <p class="small">
-                                                                @item.Descripcion
-                                                            </p>
-                                                            <p>
+                                    <div class="table-responsive">
+                                        <table class="table shoping-cart-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="120">
+                                                        <div style="text-align:end">
+                                                            @if (item.Image != null)
+                                                            {
+                                                                <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" style="object-fit: contain; height: 90px;" />
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                    <td class="desc" style="padding-top: 12px;">
+                                                        <h3 style="line-height:0">
+                                                            <a href="#" class="text-navy">
+                                                                @item.Nombre
+                                                            </a>
+                                                        </h3>
+                                                        <p class="small">
+                                                            @item.Descripcion
+                                                        </p>
+                                                        <div>
+                                                            <div style="width: 70px; float: left; padding-top: 20px;">
                                                                 $@item.Precio
-                                                                @*<s class="small text-muted">$@item.Precio</s>*@
-                                                            </p>
-                                                        <td width="60">
-                                                            <input id="@item.Id" asp-for="@item.Cantidad" type="text" class="form-control myProducts" style="text-align: right" onchange="UpdateAmount($(this)[0].id, $(this).val(), '@item.Precio', '@item.Descripcion');">
-                                                        </td>
-                                                        <td>
-                                                            <h4>
-                                                                <label id="Amount_@item.Id" style="font-size: 20px;"></label>
-                                                            </h4>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                            </div>
+                                                            <div style="width: 50px; float: left; padding-top: 10px;">
+                                                                <input id="@item.Id" asp-for="@item.Cantidad" type="text" placeholder="0" class="form-control myProducts" style="text-align: right" onchange="UpdateAmount($(this)[0].id, $(this).val(), '@item.Precio', '@item.Descripcion');">
+                                                            </div>
+                                                            <div style="width: 80px; float: right; padding-top: 10px;">
+                                                                <h4 style="margin-right: 10px">
+                                                                    <label id="Amount_@item.Id" style="font-size: 20px;"></label>
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 }
+                            </div>
+                        </fieldset>
+
+                        <h1>Datos</h1>
+                        <fieldset>
+                            @*<h2>Datos de Envio</h2>*@
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-horizontal" style="margin-left: 16px !important; margin-right: 16px !important;">
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" asp-for="Input.Nombre" required placeholder=" " />
+                                        <label asp-for="Input.Nombre" class="first_name"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" asp-for="Input.Apellido" required placeholder=" " />
+                                        <label asp-for="Input.Apellido" class="last_name"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" asp-for="Input.Direccion" required placeholder=" " />
+                                        <label asp-for="Input.Direccion" class="address"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" asp-for="Input.DireccionNro" required placeholder=" " />
+                                        <label asp-for="Input.DireccionNro" class="address_number"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" asp-for="Input.Piso" placeholder="Piso" />
+                                        <label asp-for="Input.Piso" class="floor"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" asp-for="Input.Depto" placeholder="Depto" />
+                                        <label asp-for="Input.Depto" class="floor_number"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="text" asp-for="Input.Entrecalles" placeholder="Entre calles" />
+                                        <label asp-for="Input.Entrecalles" class="between_roads"></label>
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
 
@@ -144,14 +134,14 @@
                         <fieldset>
                             <h2>Enviar Mensaje al Vendedor</h2>
                             <div class="row">
-                                <div class="ibox-content">
+                                <div class="ibox-content" style="margin-left: 20px; margin-right: 20px;">
                                     <span> Hola! Este es el pedido XXXX de DELIVERY. </span>
                                     <br />
                                     <br />
                                     <span>A nombre de: <label id="Apellido"></label>, <label id="Nombre"></label>. </span>
                                     <br />
                                     <br />
-                                    <span>Dirección de envío: <label id="Direccion"></label> <label id="DireccionNro"></label> </span> 
+                                    <span>Dirección de envío: <label id="Direccion"></label> <label id="DireccionNro"></label> </span>
                                     <br />
                                     <span>Aclaracion: <label id="Piso"></label> / <label id="Depto"></label>. </span>
                                     <br />
@@ -165,11 +155,12 @@
                                     <label>Total Pedido: $<label id="MontoTotal"></label></label>
                                 </div>
                             </div>
-                            <label for="acceptTerms">Los datos cargados son correctos?</label> <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
+                            @*<label for="acceptTerms">Los datos cargados son correctos?</label> <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">*@
                         </fieldset>
 
                         <input type="hidden" asp-for="Input.ProductosId" />
                         <input type="hidden" asp-for="Input.ProductosCantidad" />
+                        <input type="hidden" asp-for="Input.EmpresaId" />
 
                     </form>
                 </div>
@@ -219,6 +210,17 @@
             $("#wizard").steps();
             $("#form").steps({
                 bodyTag: "fieldset",
+                enableFinishButton: true,
+                enableCancelButton: false,
+                labels: {
+                    current: 'Actual',
+                    pagination: 'Paginado',
+                    finish: 'Enviar',
+                    next: 'Siguiente',
+                    previous: 'Anterior',
+                    loading: 'Cargando...',
+                    cancel: 'Cancelar'
+                },
                 onStepChanging: function (event, currentIndex, newIndex) {
                     // Always allow going backward even if the current step contains invalid fields!
                     if (currentIndex > newIndex) {
@@ -259,7 +261,7 @@
                         $("#Piso").text($("#Input_Piso").val());
                         $("#Depto").text($("#Input_Depto").val());
                         $("#Entrecalles").text($("#Input_Entrecalles").val());
-                        
+
                         var arrId = [];
                         var arrVal = [];
                         $('.myProducts').each(function () {

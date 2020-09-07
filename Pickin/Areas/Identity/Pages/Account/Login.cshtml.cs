@@ -43,11 +43,11 @@ namespace Pickin.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Debe ingresar un Email valido")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Debe ingresar una Contraseña")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

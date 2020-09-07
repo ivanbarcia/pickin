@@ -3210,6 +3210,9 @@ body.tour-open .animated {
   background: rgba(211, 211, 211, 0.4);
 }
 /* Wizard step fix */
+.wizard > .content {
+    background: inherit !important;
+}
 .wizard > .content > .body {
   position: relative;
 }
@@ -3531,10 +3534,10 @@ video {
   overflow-x: hidden;
 }
 .wrapper {
-  padding: 0 20px;
+  padding: 0 10px;
 }
 .wrapper-content {
-  padding: 10px 10px 40px;
+/*  padding: 10px 10px 40px;*/
 }
 #page-wrapper {
   padding: 0 15px;
@@ -3838,7 +3841,7 @@ code {
 .ibox-content {
   background-color: #ffffff;
   color: inherit;
-  padding: 15px 20px 20px 20px;
+  padding: 10px 0px 0px 0px;
   border-color: #e7eaec;
   border-image: none;
   border-style: solid solid none;
@@ -5430,7 +5433,7 @@ table.shoping-cart-table tr td:first-child {
   text-align: left;
 }
 table.shoping-cart-table tr td:last-child {
-  width: 80px;
+/*  width: 80px;*/
 }
 .product-name {
   font-size: 16px;

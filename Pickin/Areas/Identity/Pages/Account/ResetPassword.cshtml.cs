@@ -75,13 +75,6 @@ namespace Pickin.Areas.Identity.Pages.Account
                     Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
                 };
 
-                if (!user.InternalUser)
-                {
-                    var empresa = _context.Empresa.FindAsync(user.EmpresaId).Result;
-                    EmpresaId = empresa.Id;
-                    EmpresaImage = empresa.Image;
-                }
-
                 return Page();
             }
         }

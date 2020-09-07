@@ -52,10 +52,10 @@ namespace Pickin.Areas.Identity.Pages.Account
 
             Empresa = _context.Empresa.FindAsync(user.EmpresaId).Result;
 
-            //if (result.Succeeded)
-            //{
-            //    return RedirectToPage("/Account/ResetPassword", new { userId, code });
-            //}
+            if (result.Succeeded)
+            {
+                return RedirectToPage("/Account/ResetPassword", new { userId, code });
+            }
 
             return Page();
         }

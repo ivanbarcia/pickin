@@ -24,11 +24,25 @@ namespace Pickin.Pages.Company
         [BindProperty]
         public IList<Producto> Productos { get; set; }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(string name)
         {
-            Input = new Pedido();
+            if (name == string.Empty)
+            {
+                return BadRequest();
+            }
 
-            Productos = _context.Producto.ToList();
+            var empresa = _context.Empresa.Where(x => x.Codigo == name);
+
+            if (!empresa.Any())
+            {
+                return BadRequest();
+            }
+
+            var empresaId = empresa.FirstOrDefault().Id;
+
+            Input = new Pedido { EmpresaId = empresaId };
+
+            Productos = _context.Producto.Where(x => x.EmpresaId == empresaId).ToList();
 
             return Page();
         }
@@ -74,12 +88,14 @@ namespace Pickin.Pages.Company
                 _context.Pedido.Add(Input);
                 await _context.SaveChangesAsync();
 
-                var textMessage = string.Format("Hola!\n Este es el pedido XXXX de *DELIVERY*.\n\n A nombre de: *{1}, {0}*.\n\n Dirección de envío: *{2} {3}*\n Aclaracion: *{4} / {5}*.\n Entre calles: *{6}*.\n\n Detalle del pedido: {7}\n *Total Pedido: ${8}*", 
-                    Input.Nombre, Input.Apellido, Input.Direccion, Input.DireccionNro, Input.Piso, Input.Depto, Input.Entrecalles, detalle_productos, Input.MontoTotal);
+                var empresa = _context.Empresa.Find(Input.EmpresaId);
+
+                var textMessage = string.Format("Hola!\n Este es el pedido *{9}{10}*.\n\n A nombre de: *{1}, {0}*.\n\n Dirección de envío: *{2} {3}*\n Aclaracion: *{4} / {5}*.\n Entre calles: *{6}*.\n\n Detalle del pedido: {7}\n *Total Pedido: ${8}*", 
+                    Input.Nombre, Input.Apellido, Input.Direccion, Input.DireccionNro, Input.Piso, Input.Depto, Input.Entrecalles, detalle_productos, Input.MontoTotal, empresa.Id, Input.Id.ToString("D4"));
 
                 var textEncoded = HttpUtility.UrlEncode(textMessage);
 
-                var external_message = string.Format("https://wa.me/{0}?text={1}", "+5491132061859", textEncoded);
+                var external_message = string.Format("https://wa.me/{0}?text={1}", empresa.Celular, textEncoded);
                 
                 return Redirect(external_message);
             }

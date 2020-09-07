@@ -9,16 +9,18 @@ namespace Pickin.Models
     [Table("Pedidos")]
     public class Pedido : AuditableEntity
     {
-        [Required(ErrorMessage = "Debe ingresar un valor")]
+        public int EmpresaId { get; set; }
+
+        [Required(ErrorMessage = "*")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "Debe ingresar un valor")]
+        [Required(ErrorMessage = "*")]
         public string Apellido { get; set; }
 
-        [Required(ErrorMessage = "Debe ingresar un valor")]
+        [Required(ErrorMessage = "*")]
         public string Direccion { get; set; }
 
-        [Required(ErrorMessage = "Debe ingresar un valor")]
+        [Required(ErrorMessage = "*")]
         public string DireccionNro { get; set; }
 
         public string Piso { get; set; }
@@ -52,11 +54,11 @@ namespace Pickin.Models
         public int ProductoId { get; set; }
 
         [Display(Name = "Cantidad")]
-        [Required(ErrorMessage = "Debe ingresar un valor")]
+        [Required(ErrorMessage = "*")]
         public int Cantidad { get; set; }
 
         [Display(Name = "Precio")]
-        [Required(ErrorMessage = "Debe ingresar un valor")]
+        [Required(ErrorMessage = "*")]
         public decimal Precio { get; set; }
 
         public decimal Total { get; set; }

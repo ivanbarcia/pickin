@@ -21,7 +21,6 @@ namespace Pickin.Factory
 
             identity.AddClaim(new Claim("Id", user.Id));
             identity.AddClaim(new Claim("EmpresaId", user.EmpresaId.ToString()));
-            identity.AddClaim(new Claim("InternalUser", user.InternalUser.ToString()));
 
             if (user.Image != null)
             {
