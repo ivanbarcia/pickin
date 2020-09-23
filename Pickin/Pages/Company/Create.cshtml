@@ -10,7 +10,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-12">
+        <div style="padding-left: 5px; padding-right: 5px;">
             <div class="ibox">
                 <div class="ibox-title">
                     <cache vary-by-user="true">
@@ -30,54 +30,52 @@
                         <p>
                             Ingrese los datos a donde desea enviar los productos.
                         </p>*@
-                    
+
                     <form id="form" method="post" class="wizard-big">
                         <h1>Productos</h1>
                         <fieldset>
-                            <div class="row">
-                                @foreach (var item in Model.Productos)
-                                {
-                                    <div class="table-responsive">
-                                        <table class="table shoping-cart-table">
-                                            <tbody>
-                                                <tr>
-                                                    <td width="120">
-                                                        <div style="text-align:end">
-                                                            @if (item.Image != null)
-                                                            {
-                                                                <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" style="object-fit: contain; height: 90px;" />
-                                                            }
+                            @foreach (var item in Model.Productos)
+                            {
+                                <div class="table-responsive">
+                                    <table class="table shoping-cart-table">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 135px; border: solid; border-width: thin;">
+                                                    <div style="text-align:end">
+                                                        @if (item.Image != null)
+                                                        {
+                                                            <img alt="@item.Id" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" style="object-fit: contain; height: 90px; width: 120px;" />
+                                                        }
+                                                    </div>
+                                                </td>
+                                                <td class="desc" style="padding-top: 12px;">
+                                                    <h3 style="line-height:0">
+                                                        <a href="#" class="text-navy">
+                                                            @item.Nombre
+                                                        </a>
+                                                    </h3>
+                                                    <p class="small">
+                                                        @item.Descripcion
+                                                    </p>
+                                                    <div>
+                                                        <div style="width: 70px; float: left; padding-top: 18px;">
+                                                            $@item.Precio
                                                         </div>
-                                                    </td>
-                                                    <td class="desc" style="padding-top: 12px;">
-                                                        <h3 style="line-height:0">
-                                                            <a href="#" class="text-navy">
-                                                                @item.Nombre
-                                                            </a>
-                                                        </h3>
-                                                        <p class="small">
-                                                            @item.Descripcion
-                                                        </p>
-                                                        <div>
-                                                            <div style="width: 70px; float: left; padding-top: 20px;">
-                                                                $@item.Precio
-                                                            </div>
-                                                            <div style="width: 50px; float: left; padding-top: 10px;">
-                                                                <input id="@item.Id" asp-for="@item.Cantidad" type="text" placeholder="0" class="form-control myProducts" style="text-align: right" onchange="UpdateAmount($(this)[0].id, $(this).val(), '@item.Precio', '@item.Descripcion');">
-                                                            </div>
-                                                            <div style="width: 80px; float: right; padding-top: 10px;">
-                                                                <h4 style="margin-right: 10px">
-                                                                    <label id="Amount_@item.Id" style="font-size: 20px;"></label>
-                                                                </h4>
-                                                            </div>
+                                                        <div style="width: 50px; float: left; padding-top: 10px;">
+                                                            <input id="@item.Id" asp-for="@item.Cantidad" type="text" placeholder="0" class="form-control myProducts" style="text-align: right" onchange="UpdateAmount($(this)[0].id, $(this).val(), '@item.Precio', '@item.Descripcion');">
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                }
-                            </div>
+                                                        <div style="width: 65px; float: right; padding-top: 10px;">
+                                                            <h4 style="margin-right: 10px">
+                                                                <label id="Amount_@item.Id" style="font-size: 20px;"></label>
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
                         </fieldset>
 
                         <h1>Datos</h1>
@@ -132,7 +130,10 @@
 
                         <h1>Enviar</h1>
                         <fieldset>
-                            <h2>Enviar Mensaje al Vendedor</h2>
+                            <hr />
+                            <div style="margin-left: 5px">
+                                <h2>Enviar Mensaje al Vendedor</h2>
+                            </div>
                             <div class="row">
                                 <div class="ibox-content" style="margin-left: 20px; margin-right: 20px;">
                                     <span> Hola! Este es el pedido XXXX de DELIVERY. </span>

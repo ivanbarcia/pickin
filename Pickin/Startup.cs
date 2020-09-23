@@ -17,6 +17,7 @@ using Pickin.Factory;
 using System.Globalization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Pickin.Services;
+using Microsoft.AspNetCore.Localization;
 
 namespace Pickin
 {
@@ -41,6 +42,15 @@ namespace Pickin
                .AddDefaultTokenProviders()
                .AddEntityFrameworkStores<ApplicationDbContext>()
                .AddClaimsPrincipalFactory<MyUserClaimsPrincipalFactory>();
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("es-AR");
+                //By default the below will be set to whatever the server culture is. 
+                options.SupportedCultures = new List<CultureInfo> { new CultureInfo("es-AR") };
+
+                options.RequestCultureProviders = new List<IRequestCultureProvider>();
+            });
 
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation()
@@ -71,19 +81,12 @@ namespace Pickin
                 app.UseHsts();
             }
 
-            var cultureInfo = new CultureInfo("es-AR");
-            cultureInfo.NumberFormat.CurrencySymbol = "U$S";
-
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseRequestLocalization();
 
             app.UseEndpoints(endpoints =>
             {

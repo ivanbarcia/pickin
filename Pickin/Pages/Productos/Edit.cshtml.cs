@@ -49,6 +49,9 @@ namespace Pickin.Pages.Productos
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (Producto.Precio <= 0)
+                ModelState.AddModelError("Producto.Precio", "Debe ingresar un valor mayor a 0");
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -56,9 +59,6 @@ namespace Pickin.Pages.Productos
 
             if (postedFile != null && postedFile.Length != 0)
             {
-                // extract only the fieldname
-                var fileName = Path.GetFileName(postedFile.FileName);
-
                 MemoryStream ms = new MemoryStream();
                 postedFile.CopyTo(ms);
                 Producto.Image = ms.ToArray();

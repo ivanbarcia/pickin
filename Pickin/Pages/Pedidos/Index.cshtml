@@ -5,50 +5,143 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Pedidos[0].Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pedidos[0].Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pedidos[0].CantidadTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pedidos[0].MontoTotal)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Pedidos) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MontoTotal)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2>Pedidos</h2>
+
+                    <table id="data_table" class="footable table table-striped table-hover dataTables-example" data-page-size="50" data-filter=#filter>
+                        <thead class="datatable-header">
+                            <tr>
+                                <th data-toggle="true">Id</th>
+                                <th data-toggle="true">Fecha</th>
+                                <th data-toggle="true">Nombre</th>
+                                <th data-toggle="true">Apellido</th>
+                                <th data-toggle="true">Direccion</th>
+                                <th data-toggle="true">DireccionNro</th>
+                                <th data-toggle="true">Piso</th>
+                                <th data-toggle="true">Depto</th>
+                                <th data-toggle="true">Entrecalles</th>
+                                <th data-toggle="true">Cantidad Total</th>
+                                <th data-toggle="true">Monto Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Pedidos)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Id.ToString("D4")
+                                    </td>
+                                    <td>
+                                        @item.Fecha
+                                    </td>
+                                    <td>
+                                        @item.Nombre
+                                    </td>
+                                    <td>
+                                        @item.Apellido
+                                    </td>
+                                    <td>
+                                        @item.Direccion
+                                    </td>
+                                    <td>
+                                        @item.DireccionNro
+                                    </td>
+                                    <td>
+                                        @item.Piso
+                                    </td>
+                                    <td>
+                                        @item.Depto
+                                    </td>
+                                    <td>
+                                        @item.Entrecalles
+                                    </td>
+                                    <td>
+                                        @item.CantidadTotal
+                                    </td>
+                                    <td>
+                                        $ @item.MontoTotal
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="11">
+                                    <ul class="pagination pull-right"></ul>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/plugins/dataTables/datatables.min.css" type='text/css' />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/metisMenu/metisMenu.min.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="~/lib/app/inspinia.js"></script>
+    <script type="text/javascript" src="~/lib/plugins/dataTables/datatables.min.js"></script>
+
+    <script type="text/javascript">
+
+        function RefreshData() {
+            $('.dataTables-example').DataTable({
+                language:
+                    {
+                        "emptyTable": "Sin datos para mostrar",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior",
+                        }
+                    },
+                pageLength: 10,
+                dom: '<"html5buttons"B>lTfgitp',
+                buttons: [
+                    { extend: 'copy' },
+                    { extend: 'csv' },
+                    { extend: 'excel', title: 'Movimientos' },
+                    //{ extend: 'pdf', title: 'Socios' },
+                    {
+                        extend: 'print',
+                        customize: function (win) {
+                            $(win.document.body).addClass('white-bg');
+                            $(win.document.body).css('font-size', '10px');
+
+                            $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                        }
+                    }
+                ],
+                processing: true,
+                //order: [[0, "asc"]],
+                columnDefs: [
+                    {
+                        "targets": [1],
+                        "orderable": false
+                    }
+                ]
+            });
+        }
+
+        $(document).ready(function () {
+            RefreshData();
+        });
+
+    </script>
 }
-    </tbody>
-</table>

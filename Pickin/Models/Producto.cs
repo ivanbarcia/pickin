@@ -16,6 +16,11 @@ namespace Pickin.Models
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un valor")]
+        //[DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Currency)]
+        //[Range(1, 100000000)]
+        //[DataType(DataType.Currency)]
+        //[Column(TypeName = "decimal(18, 2)")]
         public decimal Precio { get; set; }
 
         [NotMapped]

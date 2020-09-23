@@ -18,7 +18,7 @@
 
                     <hr />
                     <div class="input-group">
-                        <input id="searchInput" type="text" placeholder="Buscar producto " class="input form-control" onkeyup="searchInversor()">
+                        <input id="searchInput" type="text" placeholder="Buscar producto " class="input form-control" onkeyup="searchProducto()">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
                         </span>
@@ -28,10 +28,10 @@
                             <tr>
                                 <th></th>
                                 <th data-toggle="true">Nombre</th>
-                                <th data-hide="all">Descripcion</th>
-                                <th data-hide="phone">Precio</th>
-                                <th data-hide="phone,tablet">Cantidad</th>
-                                <th data-hide="phone">Estado</th>
+                                <th data-toggle="true">Descripcion</th>
+                                <th data-toggle="true">Precio</th>
+                                <th data-toggle="true">Cantidad</th>
+                                <th data-toggle="true">Estado</th>
                                 <th class="text-right" data-sort-ignore="true">Acción</th>
 
                             </tr>
@@ -43,7 +43,7 @@
                                     <td>
                                         @if (item.Image != null)
                                         {
-                                            <img alt="@item.Id" class="img-circle" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" />
+                                            <img alt="@item.Id" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" style="object-fit: contain; height: 90px;" />
                                         }
                                     </td>
                                     <td>
@@ -59,12 +59,13 @@
                                         @item.Stock
                                     </td>
                                     <td>
-                                        <span class="label label-primary">Enable</span>
+                                        <span class="label label-primary">Activo</span>
                                     </td>
                                     <td class="text-right">
                                         <div class="btn-group">
-                                            <a asp-page="./Details" asp-route-id="@item.Id" class="btn-white btn btn-xs">Detalle</a>
+                                            @*<a asp-page="./Details" asp-route-id="@item.Id" class="btn-white btn btn-xs">Detalle</a>*@
                                             <a asp-page="./Edit" asp-route-id="@item.Id" class="btn-white btn btn-xs">Editar</a>
+                                            <a asp-page="./Delete" asp-route-id="@item.Id" class="btn-white btn btn-xs">Eliminar</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -100,7 +101,7 @@
 
         });
 
-        function searchInversor() {
+        function searchProducto() {
             // Declare variables
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("searchInput");
