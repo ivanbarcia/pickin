@@ -32,12 +32,6 @@ namespace Pickin.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public int? EmpresaId { get; set; }
-
-        [BindProperty]
-        public byte[] EmpresaImage { get; set; }
-
-        [BindProperty]
         public InputModel Input { get; set; }
 
         public class InputModel
@@ -47,14 +41,9 @@ namespace Pickin.Areas.Identity.Pages.Account
             public string Email { get; set; }
         }
 
-        public async Task OnGetAsync(int? id = null)
+        public async Task OnGetAsync()
         {
-            if (id.HasValue)
-            {
-                var empresa = await _context.Empresa.FindAsync(id);
-                EmpresaId = id.Value;
-                EmpresaImage = empresa.Image;
-            }
+            
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -66,15 +55,6 @@ namespace Pickin.Areas.Identity.Pages.Account
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
-                }
-
-                if (EmpresaId.HasValue)
-                {
-                    if (user.EmpresaId != EmpresaId)
-                    {
-                        // Don't reveal that the user does not exist or is not confirmed
-                        return RedirectToPage("./ForgotPasswordConfirmation", new { id = EmpresaId });
-                    }
                 }
 
                 // For more information on how to enable account confirmation and password reset please 
@@ -93,14 +73,7 @@ namespace Pickin.Areas.Identity.Pages.Account
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                return RedirectToPage("./ForgotPasswordConfirmation", new { id = EmpresaId });
-            }
-
-            if (EmpresaId.HasValue)
-            {
-                var empresa = await _context.Empresa.FindAsync(EmpresaId);
-                EmpresaId = EmpresaId;
-                EmpresaImage = empresa.Image;
+                return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
             return Page();

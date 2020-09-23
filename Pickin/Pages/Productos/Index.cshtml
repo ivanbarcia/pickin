@@ -43,7 +43,7 @@
                                     <td>
                                         @if (item.Image != null)
                                         {
-                                            <img alt="@item.Id" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" style="object-fit: contain; height: 90px;" />
+                                            <img alt="@item.Id" src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" style="object-fit: contain; height: 90px; width: 120px;" />
                                         }
                                     </td>
                                     <td>
@@ -73,7 +73,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="6">
+                                <td colspan="7">
                                     <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>

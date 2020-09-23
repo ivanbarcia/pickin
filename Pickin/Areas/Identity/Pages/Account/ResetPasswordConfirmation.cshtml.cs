@@ -18,20 +18,9 @@ namespace Pickin.Areas.Identity.Pages.Account
             _context = context;
         }
 
-        [BindProperty]
-        public int EmpresaId { get; set; }
-
-        [BindProperty]
-        public byte[] EmpresaImage { get; set; }
-
-        public async Task OnGetAsync(int? id = null)
+        public async Task OnGetAsync()
         {
-            if (id.HasValue)
-            {
-                var empresa = await _context.Empresa.FindAsync(id.Value);
-                EmpresaId = id.Value;
-                EmpresaImage = empresa.Image;
-            }
+            
         }
     }
 }

@@ -28,12 +28,6 @@ namespace Pickin.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public int? EmpresaId { get; set; }
-
-        [BindProperty]
-        public byte[] EmpresaImage { get; set; }
-
-        [BindProperty]
         public InputModel Input { get; set; }
 
         public class InputModel
@@ -83,12 +77,6 @@ namespace Pickin.Areas.Identity.Pages.Account
         {
             if (!ModelState.IsValid)
             {
-                if (EmpresaId > 0)
-                {
-                    var empresa = _context.Empresa.FindAsync(EmpresaId).Result;
-                    EmpresaImage = empresa.Image;
-                }
-
                 return Page();
             }
 
@@ -96,13 +84,13 @@ namespace Pickin.Areas.Identity.Pages.Account
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToPage("./ResetPasswordConfirmation", new { id = EmpresaId });
+                return RedirectToPage("./ResetPasswordConfirmation");
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ResetPasswordConfirmation", new { id = EmpresaId });
+                return RedirectToPage("./ResetPasswordConfirmation");
             }
 
             foreach (var error in result.Errors)
