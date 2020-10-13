@@ -51,6 +51,7 @@ namespace Pickin.Areas.Identity.Pages.Account
             StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
 
             Empresa = _context.Empresa.FindAsync(user.EmpresaId).Result;
+            code = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             if (result.Succeeded)
             {

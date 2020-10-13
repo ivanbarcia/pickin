@@ -23,7 +23,7 @@
                         <h5>@Model.Productos.FirstOrDefault().Empresa.Descripcion</h5>
                     </div>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content" style="overflow-y: scroll;">
                     @*<h2>
                             Datos de envio
                         </h2>
@@ -40,7 +40,7 @@
                                     <table class="table shoping-cart-table">
                                         <tbody>
                                             <tr>
-                                                <td style="width: 135px; border: solid; border-width: thin;">
+                                                <td style="width: 135px;">
                                                     <div style="text-align:end">
                                                         @if (item.Image != null)
                                                         {
